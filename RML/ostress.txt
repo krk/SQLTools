@@ -1,0 +1,2 @@
+ostress -E -Dsandbox.odbc -Q"insert AW2012.dbo.AA default values " -T146 -q -n100 -r10000
+

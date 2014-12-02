@@ -1,0 +1,6 @@
+.\setup.exe /q /sqlsvcpassword="" /agtsvcpassword="" /configurationfile=Install.cfg /instancename=MSSQLSERVER /IAcceptSQLServerLicenseTerms
+
+
+.\setup.exe /q /configurationfile=Install.cfg /IAcceptSQLServerLicenseTerms /sapwd=""
+
+ .\setup.exe /configurationfile=Install_UI.cfg /sapwd="" /sqlsvcpassword="" /agtsvcpassword=""  /IAcceptSQLServerLicenseTerms 

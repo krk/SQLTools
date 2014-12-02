@@ -1,0 +1,1 @@
+sqlio -kR -s300 -b64 -f1 -i1000 -o1 -t1 -R1 -LP -a0xf -BN
