@@ -86,6 +86,8 @@ select *
 from sys.dm_os_performance_counters
 where counter_name  like '%IO%' 
 	and instance_name = 'tempdb'
+
+
 select	usecounts, 
 		o.name, 
 		o.type, 

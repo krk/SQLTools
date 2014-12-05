@@ -8,16 +8,16 @@ select	F.database_id,
 		f.growth * 8. / 1024 as FileGrowthMB,
 		f.max_size * 8. / 1024 MaxSizeMB,
 		f.is_percent_growth,
-		d.log_reuse_wait_desc,
-		'use ' + d.name+ '; dbcc shrinkfile(' + F.Name + ', TRUNCATEONLY)'
+		d.log_reuse_wait_desc
+		--'use ' + d.name+ '; dbcc shrinkfile(' + F.Name + ', TRUNCATEONLY)'
 from sys.master_files f
 	join sys.databases d on d.database_id = f.database_id
-where f.database_id = 7--not in (1,3,4)	
+--where f.database_id < 5	
 order by d.name, f.type_desc desc
 -- order by f.name
 
 
-
+/*
 select	case when grouping(db_name(f.database_id)) = 0 then db_name(f.database_id) else 'z >> Total' end  as dbName,
 		case when db_name(f.database_id) = 'tempdb' then 'tempdb' else 'user_data' end as DBType,
 		case when grouping(f.type_desc) = 0 then f.type_desc else 'z >> Total' end as FileType,
@@ -67,7 +67,7 @@ where database_id > 4
 	and recovery_model_desc = 'FULL'
 	and d.is_auto_update_stats_async_on = 1
 order by name
-
+*/
 
 
 

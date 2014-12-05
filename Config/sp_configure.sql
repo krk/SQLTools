@@ -16,7 +16,7 @@ exec sp_configure 'blocked process threshold (s)', 0
 exec sp_configure 'clr enabled', 1
 exec sp_configure 'xp_cmdshell', 0 
 exec sp_configure  'scan for startup procs', 1
-reconfigure	
+--reconfigure	
 
 select *
 from sys.configurations
