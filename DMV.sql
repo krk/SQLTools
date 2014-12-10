@@ -3,8 +3,6 @@
 --DBCC SQLPERF("sys.dm_os_spinlock_stats",CLEAR);
 
 --DBCC SQLPERF(LOGSPACE);
-select *
-from sys.dm_os_sys_info
 
 select *
 from sys.dm_os_schedulers
@@ -29,26 +27,11 @@ where wait_type NOT IN (
 	'BROKER_RECEIVE_WAITFOR', 'ONDEMAND_TASK_QUEUE', 'DBMIRROR_EVENTS_QUEUE',
 	'DBMIRRORING_CMD', 'BROKER_TRANSMITTER', 'SQLTRACE_WAIT_ENTRIES',
 	'SLEEP_BPOOL_FLUSH', 'SQLTRACE_LOCK', 'DIRTY_PAGE_POLL', 'HADR_FILESTREAM_IOMGR_IOCOMPLETION',
-	'SP_SERVER_DIAGNOSTICS_SLEEP')
+	'SP_SERVER_DIAGNOSTICS_SLEEP',
+	'QDS_PERSIST_TASK_MAIN_LOOP_SLEEP','QDS_CLEANUP_STALE_QUERIES_TASK_MAIN_LOOP_SLEEP')
 	and wait_time_ms > 0	
-
-order by waiting_tasks_count desc
---order by wait_time_ms desc
+order by wait_time_ms desc
 --order by signal_wait_time_ms desc
-
-
-SELECT wt.session_id, wt.wait_type 
-, er.last_wait_type AS last_wait_type 
-, wt.wait_duration_ms 
-, wt.blocking_session_id, wt.blocking_exec_context_id, resource_description ,
-es.*
-FROM sys.dm_os_waiting_tasks wt 
-JOIN sys.dm_exec_sessions es ON wt.session_id = es.session_id 
-JOIN sys.dm_exec_requests er ON wt.session_id = er.session_id 
-WHERE es.is_user_process = 1 
-AND wt.wait_type <> 'SLEEP_TASK' 
-ORDER BY wt.wait_duration_ms desc
-
 
 
 select *
@@ -131,6 +114,8 @@ SELECT session_id ,status ,blocking_session_id
     ,transaction_id 
 FROM sys.dm_exec_requests 
 WHERE status = N'suspended';
+
+
 SELECT *  FROM sys.dm_tran_locks  where resource_database_id = db_id()
 
 SELECT TOP 5 total_worker_time/execution_count AS [Avg CPU Time],
@@ -159,5 +144,6 @@ SELECT session_id,
 	SUM(internal_objects_alloc_page_count) * 8. / 1024 / 1024 AS task_internal_objects_alloc_page_MB,
     SUM(internal_objects_dealloc_page_count) AS task_internal_objects_dealloc_page_count 
 FROM sys.dm_db_task_space_usage 
---where session_id = 55
+where session_id > 50
 GROUP BY session_id
+order by session_id

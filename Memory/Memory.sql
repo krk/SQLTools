@@ -44,6 +44,18 @@ where entries_count  > 0
 --order by pages_kb desc
 order by c.single_pages_kb + c.multi_pages_kb / 1024. desc
 
+--Cache entry count 2012
+select -- top 10
+		pages_kb / 1024. as SizeMB,
+		pages_in_use_kb / 1024. as SizeInUseMB,
+		name,
+		type,
+		entries_count,
+		entries_in_use_count
+from sys.dm_os_memory_cache_counters c
+where entries_count  > 0
+order by pages_kb desc
+
 --DBCC FREESYSTEMCACHE ('TokenAndPermUserStore')
 --DBCC FREESYSTEMCACHE ('ClrProcCache')
 --DBCC FREESYSTEMCACHE ('Temporary Tables & Table Variables')
