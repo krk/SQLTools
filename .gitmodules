@@ -1,0 +1,3 @@
+[submodule "SQLReplication"]
+	path = SQLReplication
+	url = git@github.com:ekhabarov/SQLReplication.git
