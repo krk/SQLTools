@@ -1,0 +1,1 @@
+DBCC SHRINKFILE (Publisher_log, truncateonly)
