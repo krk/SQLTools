@@ -13,4 +13,6 @@ Log on (
 	MaxSize = unlimited,
 	FileGrowth = 512mb
 )
-
+go
+alter database adm set recovery simple;
+go
