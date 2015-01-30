@@ -1,8 +1,8 @@
 declare @database varchar(8000) = db_name()
 
 exec Adm.dbo.sp_BlitzIndex 
-	@database_name = @database,
-	@mode = 0
+	@databasename = @database,
+	@mode = 1
 	--@filter = 3
 		
 /*

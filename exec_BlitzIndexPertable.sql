@@ -1,5 +1,6 @@
+declare @dbname sysname = db_name()
 exec Adm.dbo.sp_BlitzIndex 
-	@database_name = 'DB', 
+	@databasename = @dbname, 
 	@mode = 0, 
-	@schema_name = 'dbo', 
-	@table_name = 'TableName'
+	@schemaname = 'dbo', 
+	@tablename = 'Lot'
