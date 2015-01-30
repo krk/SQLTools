@@ -51,9 +51,3 @@ SELECT	--rm.role_principal_id,
 FROM sys.server_role_members rm
 	left JOIN sys.server_principals r ON rm.role_principal_id = r.principal_id
 	left JOIN sys.server_principals m ON rm.member_principal_id = m.principal_id
-
-
-
-select *
-from sys.database_role_members rm
-	join sys.database_principals dp on dp.owning_principal_id = 
