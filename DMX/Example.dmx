@@ -1,0 +1,16 @@
+Select * from $system.Discover_Sessions
+select * from $system.mdschema_cubes
+select * from $system.mdschema_dimensions
+select * from $system.mdschema_hierarchies
+select * from $system.mdschema_levels
+select * from $system.mdschema_measuregroups
+select * from $system.mdschema_measuregroup_dimensions
+select * from $system.mdschema_measures
+select * from $system.mdschema_properties
+select * from $system.mdschema_members
+select * from $system.mdschema_sets
+select * from $system.mdschema_kpis
+select * from $system.mdschema_input_datasources
+
+select * 
+from $system
