@@ -28,8 +28,9 @@ exec adm.dbo.sp_WhoIsActive
 	--@filter_type  = 'session',
 	@get_full_inner_text = 0,
 	@get_outer_command = 1,
+	@show_own_spid = 1,
 	@show_system_spids = 0,
-	@show_sleeping_spids = 1,		
+	@show_sleeping_spids = 0,		
 	@get_plans = 2,
 	@get_locks = 1,
 	@get_transaction_info = 1,	
@@ -37,5 +38,3 @@ exec adm.dbo.sp_WhoIsActive
 	@find_block_leaders = 1,
 	@get_additional_info = 1,
 	@delta_interval = 0
-
-
