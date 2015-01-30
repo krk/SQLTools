@@ -1,4 +1,9 @@
-use  Adm
+set ansi_nulls on;
+set quoted_identifier on;
+go
+
+use Adm
+go
 
 if object_id('dbo.CreateBackup') is null exec ('create procedure dbo.CreateBackup as begin return end')
 go
@@ -51,7 +56,7 @@ begin
 		
 			backup database @db_name
 			to disk = @Backup_path
-			with checksum, compression, retaindays = 30--, stats = 10 --copy_only, 
+			with checksum, compression, retaindays = 30, nounload, norewind --, stats = 10 --copy_only, 
 
 			fetch @c into @db_name 
 		end
@@ -68,14 +73,14 @@ begin
 		
 			backup database @db_name
 			to	disk = @Backup_path	
-			with checksum, compression, retaindays = 14, differential
+			with checksum, compression, retaindays = 14, differential, nounload, norewind
 
 			fetch @c into @db_name 
 		end
 	end
 
 	if @Type = 'log' begin
-		--File name format: <Server>_<database>_2014-03-30_multifile.tlog One file per day.
+		--File name format: <Server>_<database>_YYY-MM-DD_multifile.tlog One file per day.
 		while @@fetch_status = 0 begin
 			set @Backup_path =	@PathToShare + @ServerName + '\' + 
 								@ServerName + '_' + @db_name + '_' + replace(convert(varchar(100), getdate(), 111), '/', '-') + '_multifile' +'.tlog'
@@ -84,7 +89,7 @@ begin
 		
 			backup log @db_name
 			to disk = @Backup_path
-			with checksum, compression, retaindays = 2
+			with checksum, compression, retaindays = 2, nounload, norewind
 
 			fetch @c into @db_name 
 		end

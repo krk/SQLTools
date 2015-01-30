@@ -1,3 +1,9 @@
+set ansi_nulls on;
+set quoted_identifier on;
+go
+use adm 
+go
+  
 if object_id('dbo.BackupMonitor') is null exec ('create procedure dbo.BackupMonitor as begin return end')
 go
 alter procedure dbo.BackupMonitor
